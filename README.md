@@ -7,7 +7,7 @@ Follow these steps:
     * Remove all permissions on tables in this database from the role `public`
     * Give the `usage` permission on tables in this database back to the role `public`
     * Change the default privileges for your database superuser to grant insert, select, update, and delete rights to `galvanize_admin` on tables
-    * Change the default prilileges for your database superuser to grant all privileges on sequences to `galvanize_admin`
+    * Change the default privileges for your database superuser to grant all privileges on sequences to `galvanize_admin`
 
 Dump the roles the `pg_dumpall -r` command and overwite `database_roles.sql` with it.
 
@@ -31,6 +31,15 @@ Dump the roles the `pg_dumpall -r` command and overwite `database_roles.sql` wit
     * Each `User` has an email address, which is their first name, a dot, then their last name at galvanize.com
     * Kyle also has a mobile phone number, which 911.
     * Danny has a home phone number, which 0.
+
+
+insert into contact (type, value) values('email','kyle.coberly@galvanize.com');
+insert into contact (type, value) values('email', 'cj.reynolds@galvanize.com');
+insert into contact (type, value) values('email', 'danny.fritz@galvanize.com');
+insert into contact (type, value) values('email','robert.ortega@galvanize.com');
+
+
+SELECT "User".first_name, count(type) FROM "User", Contact WHERE "User".id = Contact.user_id GROUP BY "User".first_name;
 
 Dump the schema WITH the data overwrite `database_dump.sql` with it.
 
